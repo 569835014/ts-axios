@@ -32,7 +32,6 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-
     "postinstall": "ts-node tools/init",
     "travis-deploy-once": "travis-deploy-once"
   },
@@ -118,8 +117,12 @@
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.12.0",
     "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "webpack": "^4.32.2",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.25.0"
   }
 }
-
-
-
