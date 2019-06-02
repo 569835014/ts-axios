@@ -1,4 +1,4 @@
-import { isDate, isObject, encode } from './util'
+import { isDate, isPlainObject, encode } from './util'
 
 /**
  * 序列化url参数
@@ -26,7 +26,7 @@ export function buildURL(url: string, params?: any): string {
     values.forEach(val => {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)
@@ -35,7 +35,7 @@ export function buildURL(url: string, params?: any): string {
   let serializedParams = parts.join('&')
   if (serializedParams) {
     const markIndex = url.indexOf('#')
-    if (markIndex !== 1) {
+    if (markIndex !== -1) {
       url = url.slice(0, markIndex)
     }
     url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
