@@ -17,6 +17,7 @@ export type Method =
   | 'PATCH'
 
 export interface AxiosRequestConfig {
+  auth?: AxiosBasicCredentials
   url?: string
   method?: Method
   data?: any
@@ -28,6 +29,13 @@ export interface AxiosRequestConfig {
   transformResponse?: AxiosTransformer | Array<AxiosTransformer>
   cancelToken?: CancelToken
   withCredentials?: boolean
+  xsrfCookieName?: string
+  xsrfHeaderName?: string
+  onDowdLoadProgress?: (e: ProgressEvent) => void
+  onUploadProgress?: (e: ProgressEvent) => void
+  validateStatus?: (status: number) => boolean
+  paramsSerializer?: (params: any) => string
+  baseURL?: string
   [propName: string]: any
 }
 
@@ -72,6 +80,8 @@ export interface Axios {
   put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
+
+  getUri(config?: AxiosRequestConfig): string
 }
 
 export interface AxiosInstance extends Axios {
@@ -84,6 +94,12 @@ export interface AxiosStatic extends AxiosInstance {
   CancelToken: CancelTokenStatice
   Cancel: CancelStatic
   isCancel: (value: any) => boolean
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>
+  spread<T, R>(callback: (...arg: T[]) => R): (arr: T[]) => R
+  Axios: AxiosClassStatic
+}
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
 }
 export interface AxiosInterceptorManager<T> {
   use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
@@ -127,4 +143,8 @@ export interface Cancel {
 }
 export interface CancelStatic {
   new (message?: string): Cancel
+}
+export interface AxiosBasicCredentials {
+  username: string
+  password: string
 }

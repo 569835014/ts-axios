@@ -25,7 +25,7 @@ function deepMergestrat(target: any, source: any): any {
   }
 }
 
-const stratKeyDeepMerge: Array<string> = ['headers']
+const stratKeyDeepMerge: Array<string> = ['headers', 'auth']
 const startKeysFromSource: Array<string> = ['url', 'params', 'data']
 startKeysFromSource.forEach(key => {
   starts[key] = fromSourceStrat

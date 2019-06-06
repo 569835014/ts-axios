@@ -3,7 +3,12 @@ const toString = Object.prototype.toString
 export function isDate(val: any): val is Date {
   return toString.call(val) === '[object Date]'
 }
-
+export function isFormData(val: any): val is FormData {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
+export function isURLSearchParams(val: any): val is URLSearchParams {
+  return typeof val !== 'undefined' && val instanceof URLSearchParams
+}
 export function isObject(val: any): val is Object {
   return val !== null && typeof val === 'object'
 }
@@ -14,6 +19,7 @@ export function isPlainObject(val: any): val is Object {
 
 /**
  * 允许url中出现特殊字符
+ * gi 忽略大小写
  * @param val
  */
 export function encode(val: string): string {
